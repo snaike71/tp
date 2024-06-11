@@ -1,0 +1,37 @@
+### list route user
+
+GET http://localhost:3000/users
+
+### create user
+
+
+POST http://localhost:3000/users/signup
+Content-Type: application/json
+
+{
+    "email" : "john@yahoo.fr",
+    "password": "test"
+}
+
+### get user by id
+
+GET http://localhost:3000/users/1
+
+### get user by email
+
+
+GET http://localhost:3000/users/email/john@yahoo.fr
+
+### update user by id
+
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "email" : "john@yahoo.com",
+    "password": "test"
+}
+
+### delete user
+
+DELETE http://localhost:3000/users/5
