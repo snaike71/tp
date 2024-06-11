@@ -5,11 +5,19 @@ GET http://localhost:3000/users
 ### create user
 
 
-POST http://localhost:3000/users/signup
+POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email" : "john@yahoo.fr",
+    "email" : "kevin.lapert617@gmail.com",
+    "password": "test"
+}
+### login
+POST http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email" : "kevin.lapert617@gmail.com",
     "password": "test"
 }
 

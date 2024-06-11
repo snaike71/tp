@@ -8,9 +8,14 @@ import { map } from "rxjs";
 import {
     plainToClass
 } from "class-transformer";
+import { UserDto } from "src/users/dto/user.dto";
 
 
 export class SerialzeInterceptor implements NestInterceptor {
+
+    
+
+
     intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
         console.log("im an hanlder", context)
 
@@ -19,7 +24,9 @@ export class SerialzeInterceptor implements NestInterceptor {
 
                 (data: any) => {
                     console.log("Im running before", data)
-                    return data
+                    return plainToClass(UserDto, data, {
+                        excludeExtraneousValues: true
+                    })
                 })
 
         )
