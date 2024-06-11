@@ -8,17 +8,17 @@ export class UsersService {
 
     constructor(@InjectRepository(User) private repo: Repository<User>) {}
 
-    create(email: string, password: string) {
+    async create(email: string, password: string) {
         const user = this.repo.create({ email, password });
-        return this.repo.save(user);
+        return await this.repo.save(user);
     }
 
-    findOneById(id: number) {
-        return this.repo.findOneBy({ id });
+    async findOneById(id: number) {
+        return await this.repo.findOneBy({ id });
     }
 
-    findOneByEmail(email: string) {
-        return this.repo.findOneBy({ email });
+    async findOneByEmail(email: string) {
+        return await this.repo.findOneBy({ email });
     }
 
     async update(id: number, attrs: Partial<User>) {
