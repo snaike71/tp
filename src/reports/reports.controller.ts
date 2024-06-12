@@ -11,14 +11,11 @@ export class ReportsController {
   constructor(private readonly reportsService: ReportsService) {}
 
   @Post()
-  @UseGuards(AuthGuard) 
-  @UsePipes(ValidationPipe) 
+  @UseGuards(AuthGuard)  
   createReport(@Body() body: CreateReportDto, @CurrentUser() user:any) {
     return this.reportsService.create(body, user);
   }
   @Patch()
-  @UseGuards(AuthGuard) 
-  @UsePipes(ValidationPipe) 
   appoveReport(@Param("id") id : string, @Body() body : ApproveReportDto) {
     return this.reportsService.changeApproval(id, body.approved)
   }
