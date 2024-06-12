@@ -1,6 +1,6 @@
-import { NestFactory } from '@nestjs/core';
+import { NestApplication, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 // Utilisation de require pour importer cookie-session
 const cookieSession = require('cookie-session');
 
