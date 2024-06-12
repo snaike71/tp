@@ -43,3 +43,15 @@ Content-Type: application/json
 ### delete user
 
 DELETE http://localhost:3000/users/5
+
+
+###teste
+
+GET http://localhost:3000/auth/session
+
+###teste
+
+GET http://localhost:3000/auth/whoAmI
+
+
+
