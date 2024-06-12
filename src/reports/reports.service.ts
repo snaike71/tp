@@ -5,6 +5,7 @@ import { Report } from './reports.entity';
 import { CreateReportDto } from './dto/create-report.dto';
 import { User } from 'src/users/users.entity';
 import { NotFoundError } from 'rxjs';
+import { GetEstimateDto } from './dto/get-estimate.dto';
 
 @Injectable()
 export class ReportsService {
@@ -28,5 +29,10 @@ export class ReportsService {
     }
     report.approved = approved
     return this.repo.save(report)
+  }
+  createEstimate(estimateDto: GetEstimateDto){
+    return this.repo.createQueryBuilder()
+        .select("*")
+        .getRawMany()
   }
 }
