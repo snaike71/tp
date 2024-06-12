@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Session, UseInterceptors } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -17,18 +17,22 @@ export class UsersController {
         private authService: AuthService
         ) {}
 
-    @Post('signup')
+        @Post('signup')
     @UseInterceptors(SerialzeInterceptor)
-    async signup( @Body() body: CreateUserDto) {
-      const user = await this.authService.signup(body.email, body.password);
-      return user;
+    async signup(@Body() body: CreateUserDto, @Session() session: any) {
+        const user = await this.authService.signup(body.email, body.password);
+        session.userId = user.id;  // Persist user ID in session
+        return user;
     }
+
     @Post('signin')
     @UseInterceptors(SerialzeInterceptor)
-    async signin(@Body() body: LoginUserDto) {
-      const user = await this.authService.signin(body.email, body.password);
-      return user;
+    async signin(@Body() body: LoginUserDto, @Session() session: any) {
+        const user = await this.authService.signin(body.email, body.password);
+        session.userId = user.id;  // Persist user ID in session
+        return user;
     }
+
 
     @Get(':id')
     @UseInterceptors(SerialzeInterceptor)
@@ -49,5 +53,9 @@ export class UsersController {
     @Delete(':id')
     deleteUserById(@Param('id') id: number) {
         return this.usersService.remove(id);
+    }
+    @Get('session')
+    getSession(@Session() session: any) {
+        return session.userId ? { userId: session.userId } : { message: 'No user logged in' };
     }
 }
